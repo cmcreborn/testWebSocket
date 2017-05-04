@@ -1,0 +1,93 @@
+<!DOCTYPE HTML>
+<html>
+   <head>
+	
+      <script type="text/javascript">
+     
+                    var arry0=new WebSocket("wss://echo.websocket.org");
+                    var arry1=new WebSocket("wss://echo.websocket.org");
+                    var wsArray = [arry0,arry1,new WebSocket("wss://echo.websocket.org"),new WebSocket("wss://echo.websocket.org")];
+                                        
+                    wsArray[0].onopen = function(){
+                        wsArray[0].send("Hi I am wsArray[0] , this is onopen function");
+                        console.log("wsArray[0] Message is sent...");
+                    };
+
+                    wsArray[0].onmessage = function (evt) 
+                    { 
+                        var received_msg = evt.data;
+                        console.log("wsArray[0] Message is received..."+evt.data.toString());
+                    };
+                        
+                    wsArray[0].onclose = function()
+                    { 
+                        // websocket is closed.
+                        console.log("wsArray[0] Connection is closed..."); 
+                    };
+                    /////////////////
+                    wsArray[1].onopen = function(){
+                        wsArray[1].send("Hi I am wsArray[1] , this is onopen function");
+                        console.log("wsArray[1] Message is sent...");
+                    };
+
+                    wsArray[1].onmessage = function (evt) 
+                    { 
+                        var received_msg = evt.data;
+                        console.log("wsArray[1] Message is received..."+evt.data.toString());
+                    };
+                        
+                    wsArray[1].onclose = function()
+                    { 
+                        // websocket is closed.
+                        console.log("wsArray[1] Connection is closed..."); 
+                    };
+
+          function closews(closeline){
+                    
+                    console.log("closeline= "+closeline);
+                    wsArray[closeline].close();
+                    
+
+            }
+        
+               
+      </script>
+		
+   </head>
+   <body>
+   
+      
+       <div id="sse">
+         <a href="javascript:closews(0)">close WebSocket array 0</a>
+      </div>
+      <div id="sse">
+         <a href="javascript:closews(1)">close WebSocket array 1</a>
+      </div>
+      
+   </body>
+</html>
+
+
+<!--// Create a socket instance
+var socket = new WebSocket('ws://localhost:8080');
+
+// Open the socket
+socket.onopen = function(event) {
+	
+	// Send an initial message
+	socket.send('I am the client and I\'m listening!');
+	
+	// Listen for messages
+	socket.onmessage = function(event) {
+		console.log('Client received a message',event);
+	};
+	
+	// Listen for socket closes
+	socket.onclose = function(event) {
+		console.log('Client notified socket has closed',event);
+	};
+	
+	// To close the socket....
+	//socket.close()
+	
+};-->
